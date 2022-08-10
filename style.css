@@ -1,0 +1,66 @@
+body
+{
+    background-color:blanchedalmond;
+    margin: 0;
+    height: 100vh;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+header
+{
+    text-align: center;
+}
+
+main
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+#canvas
+{
+    display: grid;
+    width: 600px;
+    aspect-ratio: 1/1;
+}   
+
+.cell
+{
+    background-color: rgb(237, 237, 232);
+}
+
+.selected
+{
+    background-color: black;
+}
+
+/*flex containers*/
+
+.flex-column
+{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.color-input
+{
+    align-items: center;
+    gap: .5em;
+}
+
+.bttn-container
+{
+    gap: .5em;
+}
+
+.flex-row
+{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}

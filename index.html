@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title>Etch a Sketch!</title>
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+
+    <body ondragstart="return false;" ondrop="return false;">
+        
+        <header>
+            
+            <h1>Etch-a-Sketch!</h1>
+
+        </header>
+
+        <main>
+
+            <div class="flex-column">
+
+                <div class="flex-column color-input">
+                    Pen Color
+                    <input type="color" class="penColorPicker" name="Color" value="#000000">
+                </div>
+
+                <div class="flex-column color-input">
+                    BG Color
+                    <input type="color" class="bgColorPicker" name="Color" value="#edede8">
+                </div>
+                
+            </div>
+            
+            <div class="flex-column">
+
+                <div id="canvas" oncontextmenu="return false">
+                </div>
+
+                <div class="flex-row">
+
+                    <button class="size-bttn">CHANGE CANVAS SIZE</button>
+
+                </div>
+
+            </div>
+            
+            <div class="flex-column bttn-container">
+
+                <button class="pen-bttn">PEN MODE</button>
+                <button class="eraser-bttn">ERASER MODE</button>
+                <button class="clear-bttn">CLEAR</button>
+            </div>
+            
+            
+        </main>
+
+
+    </body>
+    <script async src="script.js"></script>
+
+</html>
