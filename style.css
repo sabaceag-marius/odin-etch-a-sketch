@@ -1,6 +1,7 @@
 body
 {
-    background-color:blanchedalmond;
+    font-family:'Lato';
+    background-color:#bfbcae;
     margin: 0;
     height: 100vh;
     
@@ -26,12 +27,8 @@ main
     display: grid;
     width: 600px;
     aspect-ratio: 1/1;
+    border: 2px solid rgba(0, 0, 0, .6);
 }   
-
-.cell
-{
-    background-color: rgb(237, 237, 232);
-}
 
 .selected
 {
@@ -63,4 +60,47 @@ main
     display: flex;
     flex-direction: row;
     gap: 2em;
+}
+
+.range
+{
+    align-items: center;
+    gap: .5em;
+}
+
+button
+{
+    padding: 1em .5em;
+    box-shadow: .075em .1em black;
+    border: 1px solid black;
+    border-radius: .75em;
+    
+    font-weight: bold;
+
+    color: black;
+
+    transition-delay: 100ms;
+}
+
+button:hover
+{
+    background-color: #eeede1;
+    cursor: grab;
+}
+
+button.selected
+{
+
+    background-color: yellowgreen;
+    color: white;
+}
+
+input[type="range" i]:hover
+{
+    cursor: ew-resize;
+}
+
+input[type="color" i]:hover
+{
+    cursor: grab;
 }

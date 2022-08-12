@@ -1,25 +1,71 @@
+
+let grid = document.querySelectorAll('.cell');
+let clickActive = false;
+let penMode = true;
+
+const DEFAULT_PEN_COLOR = '#000000';
+const DEFAULT_BG_COLOR = '#edede8';
+
+let currentPenColor =DEFAULT_PEN_COLOR,
+    currentBGColor = DEFAULT_BG_COLOR;
 function main()
 {
     //Initialize the grid
     resizeCanvas(16);
-    
-    let canvasSize = 16;
-    let grid = document.querySelectorAll('.cell');
 
-    //Changing the color
+    //Changing the colors
 
     const penColorPicker = document.querySelector('.penColorPicker');
-    let currentPenColor ='#000000';
-    const BGColor = '#edede8';
+    const BGColorPicker =  document.querySelector('.BGColorPicker');
+    
     penColorPicker.addEventListener('change', (event) =>
     {
         currentPenColor = event.target.value;
     });
 
+    BGColorPicker.addEventListener('change', (event) =>
+    {
+        let previousBGColor = currentBGColor;
+        currentBGColor = event.target.value;
+
+        grid.forEach(cell => {
+            let cellColor = cell.getAttribute('style').slice(-7);
+            if(cellColor == previousBGColor) cell.setAttribute('style',`background-color: ${currentBGColor}`);
+
+        });
+    });
+
+    //Buttons
+    
+    const penBttn = document.querySelector('.pen-bttn');
+    const eraserBttn = document.querySelector('.eraser-bttn');
+    const resetBttn = document.querySelector('.reset-bttn')
+
+    penBttn.addEventListener('click', () =>
+    {
+        penMode = true;
+        penBttn.classList.add('selected');
+        eraserBttn.classList.remove('selected');
+    });
+    
+    eraserBttn.addEventListener('click', () =>
+    {
+        penMode = false;
+        eraserBttn.classList.add('selected');
+        penBttn.classList.remove('selected');
+    });
+    
+    resetBttn.addEventListener('click', () =>
+    {
+        
+        grid.forEach(cell =>
+        {
+            cell.setAttribute('style',`background-color: ${currentBGColor}`);
+        });
+    
+    });
 
     //Drawing
-    let clickActive = false;
-
     window.addEventListener('mousedown',() => 
     {
         clickActive = true;
@@ -30,71 +76,21 @@ function main()
         clickActive = false;
     });
 
+    //Size range
+    const sizeRange = document.querySelector('.sizeRange');
 
-    grid.forEach(cell => 
+
+    sizeRange.addEventListener('input', () => 
     {
-        
-        cell.addEventListener('mousedown',() =>
-        {
-            if(penMode) cell.setAttribute('style',`background-color: ${currentPenColor}`);
-            else cell.removeAttribute('style');
-        });
-
-        cell.addEventListener('mouseenter',() => 
-        {
-            if(!clickActive) return;
-
-            if(penMode) cell.setAttribute('style',`background-color: ${currentPenColor}`);
-            else cell.removeAttribute('style');
-        });
-        
+        const rangeValue = document.querySelector('.rangeValue');
+        rangeValue.textContent = sizeRange.value;
     });
 
-    
-    
-    //Buttons
-    let penMode = true;
-    
-    const penBttn = document.querySelector('.pen-bttn');
-    const eraserBttn = document.querySelector('.eraser-bttn');
-    const sizeBttn = document.querySelector('.size-bttn');
-    const clearBttn = document.querySelector('.clear-bttn')
-
-    penBttn.addEventListener('click', () =>
+    sizeRange.addEventListener('change',() => 
     {
-        penMode = true;
-    });
-    
-    eraserBttn.addEventListener('click', () =>
-    {
-        penMode = false;
+        resizeCanvas(sizeRange.value);
     });
 
-    sizeBttn.addEventListener('click', () =>
-    {
-        let width = Number(prompt("Size"));
-        
-        if(width == NaN)
-        {
-            alert('error');
-            return;
-        }
-        
-        resizeCanvas(width);
-
-        canvasSize =  width;
-        grid = document.querySelectorAll('.cell');
-    });
-    
-    clearBttn.addEventListener('click', () =>
-    {
-        
-        grid.forEach(cell =>
-        {
-            cell.removeAttribute('style');
-        });
-    
-    });
 }
 
 
@@ -109,12 +105,32 @@ function resizeCanvas(x)
     for(let i = 1; i<=x*x; i++) 
     {
         const cell = document.createElement('div');
+        cell.setAttribute('style',`background-color: ${currentBGColor}`);
         cell.classList.add('cell');
         canvas.appendChild(cell);
     }
     
     canvas.style.gridTemplateColumns = `repeat(${x},auto)`;
-}
+    grid = document.querySelectorAll('.cell');
 
+    grid.forEach(cell => 
+        {
+            
+            cell.addEventListener('mousedown',() =>
+            {
+                if(penMode) cell.setAttribute('style',`background-color: ${currentPenColor}`);
+                else cell.setAttribute('style',`background-color: ${currentBGColor}`);
+            });
+    
+            cell.addEventListener('mouseenter',() => 
+            {
+                if(!clickActive) return;
+    
+                if(penMode) cell.setAttribute('style',`background-color: ${currentPenColor}`);
+                else cell.setAttribute('style',`background-color: ${currentBGColor}`);
+            });
+            
+        });
+}
 
 main();

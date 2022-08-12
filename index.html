@@ -6,6 +6,8 @@
 
         <title>Etch a Sketch!</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Lato">
 
     </head>
 
@@ -28,7 +30,7 @@
 
                 <div class="flex-column color-input">
                     BG Color
-                    <input type="color" class="bgColorPicker" name="Color" value="#edede8">
+                    <input type="color" class="BGColorPicker" name="Color" value="#edede8">
                 </div>
                 
             </div>
@@ -38,9 +40,10 @@
                 <div id="canvas" oncontextmenu="return false">
                 </div>
 
-                <div class="flex-row">
+                <div class="flex-column range">
 
-                    <button class="size-bttn">CHANGE CANVAS SIZE</button>
+                    <input class="sizeRange" type="range" value="16" min="2" max="100">
+                    <div> SIZE:<span class="rangeValue">16</span> </div>
 
                 </div>
 
@@ -48,14 +51,13 @@
             
             <div class="flex-column bttn-container">
 
-                <button class="pen-bttn">PEN MODE</button>
+                <button class="pen-bttn selected">PEN MODE</button>
                 <button class="eraser-bttn">ERASER MODE</button>
-                <button class="clear-bttn">CLEAR</button>
+                <button class="reset-bttn">RESET</button>
             </div>
             
             
         </main>
-
 
     </body>
     <script async src="script.js"></script>
